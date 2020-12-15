@@ -2,39 +2,45 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\{
+  User,
+  Role,
+};
 
 final class UserRepository extends Repository
 {
-  /**
-   * Создает пользователя из `$input['email']` и `$input['password']`
-   */
-  public static function storeSeller(array $input) : array
+  public static function storeModerator(array $input) : array
   {
-    $email    = $input['email'];
-    $password = bcrypt($input['password']);
+    $user = self::storeUser($input, Role::MODERATOR);
 
-    $user = User::create([
-      'email'    => $email,
-      'password' => $password,
-    ]);
-
-    return compact('user');
+    return $user;
   }
 
-  /**
-   * Создает пользователя из `$input['phone']` и `$input['password']`
-   */
-  public static function storeBuyer(array $input) : array
+  public static function storeProvider(array $input) : array
   {
-    $phone    = $input['phone'];
-    $password = bcrypt($input['password']);
+    $user = self::storeUser($input, Role::PROVIDER);
 
-    $user = User::create([
-      'phone'    => $phone,
-      'password' => $password,
-    ]);
+    return $user;
+  }
+
+  public static function storeClient(array $input) : array
+  {
+    $user = self::storeUser($input, Role::CLIENT);
+
+    return $user;
+  }
+
+
+
+  private static function storeUser(array $input, int $role) : array
+  {
+    $input['password'] = bcrypt($input['password']);
+    $input['role_id']  = $role;
+    $input['city_id']  = 1;
+
+    $user = new User();
+    fill_model($user, $input);
+    $user->save();
 
     return compact('user');
   }

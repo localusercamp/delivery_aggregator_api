@@ -4,21 +4,23 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\{ Request, JsonResponse };
 
 use App\Http\Requests\Auth\{
-  SellerSignupRequest,
-  SellerSigninRequest,
-  BuyerSignupRequest,
-  BuyerSigninRequest,
+  ProviderSignupRequest,
+  ProviderSigninRequest,
+  ClientSignupRequest,
+  ClientSigninRequest,
+  ModeratorSignupRequest,
+  ModeratorSigninRequest,
   SignoutRequest,
 };
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
-  /**
-   * Авторизация
-   */
-  public function signinSeller(SellerSigninRequest $request) : JsonResponse
+
+  #region ----------Авторизация----------
+  public function signinModerator(ModeratorSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
     $user   = $input['user'];
@@ -26,7 +28,7 @@ class AuthController extends Controller
     return response()->json($output, 200);
   }
 
-  public function signinBuyer(BuyerSigninRequest $request) : JsonResponse
+  public function signinProvider(ProviderSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
     $user   = $input['user'];
@@ -34,25 +36,40 @@ class AuthController extends Controller
     return response()->json($output, 200);
   }
 
-
-  /**
-   * Регистрация
-   */
-  public function signupSeller(SellerSignupRequest $request) : JsonResponse
+  public function signinClient(ClientSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
     $user   = $input['user'];
-    $output = act('Auth\\SignupAction', $user);
+    $output = act('Auth\\SigninAction', $user);
     return response()->json($output, 200);
   }
+  #endregion
 
-  public function signupBuyer(BuyerSignupRequest $request) : JsonResponse
+  #region ----------Регистрация----------
+  public function signupModerator(ModeratorSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
     $user   = $input['user'];
-    $output = act('Auth\\SignupAction', $user);
+    $output = act('Auth\\SignupAction', $user, Role::MODERATOR);
     return response()->json($output, 200);
   }
+
+  public function signupProvider(ProviderSignupRequest $request) : JsonResponse
+  {
+    $input  = $request->validated();
+    $user   = $input['user'];
+    $output = act('Auth\\SignupAction', $user, Role::PROVIDER);
+    return response()->json($output, 200);
+  }
+
+  public function signupClient(ClientSignupRequest $request) : JsonResponse
+  {
+    $input  = $request->validated();
+    $user   = $input['user'];
+    $output = act('Auth\\SignupAction', $user, Role::CLIENT);
+    return response()->json($output, 200);
+  }
+  #endregion
 
 
   /**

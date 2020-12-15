@@ -4,12 +4,10 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BuyerSigninRequest extends FormRequest
+class ProviderSigninRequest extends FormRequest
 {
   public function authorize() : bool
   {
-    dd(!$this->request());
-    auth()->validate();
     return true;
   }
 
@@ -28,7 +26,7 @@ class BuyerSigninRequest extends FormRequest
       $user = $data['user'];
       if (!auth()->validate($user)) {
         $validator->after(function ($validator) {
-          $validator->errors()->add('message', 'Неправильный номер телефона или пароль.');
+          $validator->errors()->add('message', 'Неправильный электронный адрес или пароль.');
         });
       }
     }

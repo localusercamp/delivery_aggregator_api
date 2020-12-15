@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class CitySeeder extends Seeder
 {
     /**
@@ -15,13 +16,7 @@ class CitySeeder extends Seeder
     {
       DB::table('city')->truncate();
       DB::table('city')->insert([
-        ['title' => 'Ханты-Мансийск'],
-        ['title' => 'Сургут'],
-        ['title' => 'Нижневартовск'],
-        ['title' => 'Урай'],
-        ['title' => 'Радужный'],
-        ['title' => 'Нефтеюганск'],
-        ['title' => 'Югорск'],
+        ['title' => 'Ханты-Мансийск']
       ]);
     }
 }

@@ -4,17 +4,19 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SellerSigninRequest extends FormRequest
+class ModeratorSigninRequest extends FormRequest
 {
   public function authorize() : bool
   {
+    dd(!$this->request());
+    auth()->validate();
     return true;
   }
 
   public function rules() : array
   {
     return [
-      'user.email'    => 'required|string|email:rfc,strict,filter',
+      'user.phone'    => 'required|string|size:10',
       'user.password' => 'required|string|min:6',
     ];
   }
@@ -26,7 +28,7 @@ class SellerSigninRequest extends FormRequest
       $user = $data['user'];
       if (!auth()->validate($user)) {
         $validator->after(function ($validator) {
-          $validator->errors()->add('message', 'Неправильный электронный адрес или пароль.');
+          $validator->errors()->add('message', 'Неправильный номер телефона или пароль.');
         });
       }
     }

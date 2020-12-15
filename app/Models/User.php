@@ -7,10 +7,18 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Extentions\JWTSubjectExtention;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+
+use Illuminate\Database\Eloquent\Relations\{
+  BelongsTo,
+  BelongsToMany,
+  HasMany,
+};
 
 class User extends Authenticatable implements JWTSubject
 {
-  use HasFactory, Notifiable;
+  use HasFactory, Notifiable, JWTSubjectExtention;
 
   protected $table = 'user';
 
@@ -27,19 +35,68 @@ class User extends Authenticatable implements JWTSubject
     'remember_token',
   ];
 
-  /**
-   * Get the identifier that will be stored in the subject claim of the JWT.
-   */
-  public function getJWTIdentifier()
+
+
+  #region   ----------Attributes----------
+  public function getIsAdminAttribute()
   {
-    return $this->getKey();
+    return $this->role_id === Role::ADMIN;
   }
 
-  /**
-   * Return a key value array, containing any custom claims to be added to the JWT.
-   */
-  public function getJWTCustomClaims()
+  public function getIsModeratorAttribute()
   {
-    return [];
+    return $this->role_id === Role::MODERATOR;
   }
+
+  public function getIsProviderAttribute()
+  {
+    return $this->role_id === Role::PROVIDER;
+  }
+
+  public function getIsClientAttribute()
+  {
+    return $this->role_id === Role::CLIENT;
+  }
+  #endregion
+
+
+  #region   ----------Scopes----------
+  public function scopeAdmins(EloquentBuilder $query): EloquentBuilder
+  {
+    return $query->where('role_id', Role::ADMIN);
+  }
+
+  public function scopeModerators(EloquentBuilder $query): EloquentBuilder
+  {
+    return $query->where('role_id', Role::MODERATOR);
+  }
+
+  public function scopeProviders(EloquentBuilder $query): EloquentBuilder
+  {
+    return $query->where('role_id', Role::PROVIDER);
+  }
+
+  public function scopeClients(EloquentBuilder $query): EloquentBuilder
+  {
+    return $query->where('role_id', Role::CLIENT);
+  }
+  #endregion
+
+
+  #region   ----------Relations----------
+  public function role() : BelongsTo
+  {
+    return $this->belongsTo(Role::class, 'role_id', 'id');
+  }
+
+  public function city() : BelongsTo
+  {
+    return $this->belongsTo(City::class, 'city_id', 'id');
+  }
+
+  public function orders() : HasMany
+  {
+    return $this->hasMany(Order::class, 'client_id', 'id');
+  }
+  #endregion
 }

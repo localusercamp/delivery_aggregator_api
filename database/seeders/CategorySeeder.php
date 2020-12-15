@@ -16,13 +16,10 @@ class CategorySeeder extends Seeder
   {
     DB::table('category')->truncate();
     DB::table('category')->insert([
-      [
-        'id'    => 1,
-        'title' => 'Сантехника',
-      ], [
-        'id'    => 2,
-        'title' => 'Валонтерство',
-      ],
+      ['title' => 'Суши'],
+      ['title' => 'Роллы'],
+      ['title' => 'Пицца'],
+      ['title' => 'Пельмени'],
     ]);
   }
 }

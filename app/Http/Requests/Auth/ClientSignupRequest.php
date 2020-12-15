@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SellerSignupRequest extends FormRequest
+class ClientSignupRequest extends FormRequest
 {
   public function authorize() : bool
   {
@@ -14,7 +14,7 @@ class SellerSignupRequest extends FormRequest
   public function rules() : array
   {
     return [
-      'user.email'    => 'required|string|email:rfc,strict,filter|unique:user',
+      'user.phone'    => 'required|string|size:10|unique:user',
       'user.password' => 'required|string|min:6',
     ];
   }

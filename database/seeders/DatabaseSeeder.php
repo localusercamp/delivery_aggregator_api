@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
@@ -15,8 +16,9 @@ class DatabaseSeeder extends Seeder
     {
       $this->call([
         CitySeeder::class,
+        UserTypeSeeder::class,
+        RoleSeeder::class,
         CategorySeeder::class,
-        TagSeeder::class,
       ]);
     }
 }

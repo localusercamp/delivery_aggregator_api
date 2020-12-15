@@ -1,10 +1,10 @@
 <?php
 
 Route::middleware('guest')->group(function() {
-  Route::post('seller/signup', 'AuthController@signupSeller');
-  Route::post('seller/signin', 'AuthController@signinSeller');
-  Route::post('buyer/signup',  'AuthController@signupBuyer');
-  Route::post('buyer/signin',  'AuthController@signinBuyer');
+  Route::post('provider/signup', 'AuthController@signupProvider');
+  Route::post('provider/signin', 'AuthController@signinProvider');
+  Route::post('client/signup',  'AuthController@signupClient');
+  Route::post('client/signin',  'AuthController@signinClient');
 });
 
 Route::middleware('authenticated')->group(function() {

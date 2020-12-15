@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BuyerSignupRequest extends FormRequest
+class ModeratorSignupRequest extends FormRequest
 {
   public function authorize() : bool
   {
