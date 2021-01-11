@@ -16,17 +16,16 @@ class ModeratorSigninRequest extends FormRequest
   public function rules() : array
   {
     return [
-      'user.phone'    => 'required|string|size:10',
-      'user.password' => 'required|string|min:6',
+      'phone'    => 'required|string|size:10',
+      'password' => 'required|string|min:6',
     ];
   }
 
   public function withValidator($validator)
   {
     if ($validator->passes()) {
-      $data = $validator->validated();
-      $user = $data['user'];
-      if (!auth()->validate($user)) {
+      $credentials = $validator->validated();
+      if (!auth()->validate($credentials)) {
         $validator->after(function ($validator) {
           $validator->errors()->add('message', 'Неправильный номер телефона или пароль.');
         });

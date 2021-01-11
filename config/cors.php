@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'paths' => ['auth/*'],
 
     /*
     * Matches the request method. `[*]` allows all methods.

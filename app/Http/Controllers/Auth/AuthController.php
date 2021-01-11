@@ -23,24 +23,21 @@ class AuthController extends Controller
   public function signinModerator(ModeratorSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $user   = $input['user'];
-    $output = act('Auth\\SigninAction', $user);
+    $output = act('Auth\\SigninAction', $input);
     return response()->json($output, 200);
   }
 
   public function signinProvider(ProviderSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $user   = $input['user'];
-    $output = act('Auth\\SigninAction', $user);
+    $output = act('Auth\\SigninAction', $input);
     return response()->json($output, 200);
   }
 
   public function signinClient(ClientSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $user   = $input['user'];
-    $output = act('Auth\\SigninAction', $user);
+    $output = act('Auth\\SigninAction', $input);
     return response()->json($output, 200);
   }
   #endregion
@@ -49,24 +46,21 @@ class AuthController extends Controller
   public function signupModerator(ModeratorSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $user   = $input['user'];
-    $output = act('Auth\\SignupAction', $user, Role::MODERATOR);
+    $output = act('Auth\\SignupAction', $input, Role::MODERATOR);
     return response()->json($output, 200);
   }
 
   public function signupProvider(ProviderSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $user   = $input['user'];
-    $output = act('Auth\\SignupAction', $user, Role::PROVIDER);
+    $output = act('Auth\\SignupAction', $input, Role::PROVIDER);
     return response()->json($output, 200);
   }
 
   public function signupClient(ClientSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $user   = $input['user'];
-    $output = act('Auth\\SignupAction', $user, Role::CLIENT);
+    $output = act('Auth\\SignupAction', $input, Role::CLIENT);
     return response()->json($output, 200);
   }
   #endregion

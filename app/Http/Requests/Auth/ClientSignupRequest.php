@@ -14,8 +14,8 @@ class ClientSignupRequest extends FormRequest
   public function rules() : array
   {
     return [
-      'user.phone'    => 'required|string|size:10|unique:user',
-      'user.password' => 'required|string|min:6',
+      'phone'    => 'required|string|size:10|unique:user',
+      'password' => 'required|string|min:6',
     ];
   }
 }
