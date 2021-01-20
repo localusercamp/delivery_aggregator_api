@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
       CitySeeder::class,
       RoleSeeder::class,
       CategorySeeder::class,
+      ProductOptionTypeSeeder::class,
     ]);
   }
 }

@@ -38,13 +38,10 @@ class RouteServiceProvider extends ServiceProvider
     $this->configureRateLimiting();
 
     $this->routes(function () {
-      Route::middleware('backoffice')
+      Route::prefix('app')
+        ->middleware('app')
         ->namespace($this->namespace . '\\App')
-        ->group(base_path('routes/backoffice.php'));
-
-      Route::middleware('frontoffice')
-        ->namespace($this->namespace . '\\App')
-        ->group(base_path('routes/frontoffice.php'));
+        ->group(base_path('routes/app.php'));
 
       Route::prefix('auth')
         ->middleware('auth')

@@ -1,10 +1,14 @@
 <?php
 
 Route::middleware('guest')->group(function() {
-  Route::post('provider/signup', 'AuthController@signupProvider');
-  Route::post('provider/signin', 'AuthController@signinProvider');
-  Route::post('client/signup',  'AuthController@signupClient');
-  Route::post('client/signin',  'AuthController@signinClient');
+  Route::prefix('provider')->group(function() {
+    Route::post('signup', 'AuthController@signupProvider');
+    Route::post('signin', 'AuthController@signinProvider');
+  });
+  Route::prefix('client')->group(function() {
+    Route::post('signup',  'AuthController@signupClient');
+    Route::post('signin',  'AuthController@signinClient');
+  });
 });
 
 Route::middleware('authenticated')->group(function() {

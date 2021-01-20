@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\{ Request, JsonResponse };
+use Illuminate\Http\JsonResponse;
 
 use App\Http\Requests\Auth\{
   ProviderSignupRequest,

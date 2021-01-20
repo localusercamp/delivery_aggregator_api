@@ -45,22 +45,16 @@ class Kernel extends HttpKernel
     //   'content-disposition-permission',
     // ],
 
-    'backoffice' => [
+    'app' => [
       'throttle:60,1',
       \Illuminate\Routing\Middleware\SubstituteBindings::class,
-      'content-disposition-permission',
-    ],
-
-    'frontoffice' => [
-      'throttle:60,1',
-      \Illuminate\Routing\Middleware\SubstituteBindings::class,
-      'content-disposition-permission',
+      // 'content-disposition-permission',
     ],
 
     'auth' => [
       'throttle:60,1',
       \Illuminate\Routing\Middleware\SubstituteBindings::class,
-      'content-disposition-permission',
+      // 'content-disposition-permission',
     ],
   ];
 
