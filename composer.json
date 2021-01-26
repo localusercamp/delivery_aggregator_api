@@ -9,11 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "cooperav/sms-aero-v2-laravel": "^1.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "predis/predis": "^1.1",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
@@ -40,7 +42,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-          "App\\Helpers\\Helpers.php"
+          "App\\Helpers\\Helpers.php",
+          "App\\Helpers\\Constants.php"
         ]
     },
     "autoload-dev": {

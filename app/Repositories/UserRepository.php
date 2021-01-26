@@ -11,28 +11,22 @@ final class UserRepository extends Repository
 {
   public static function storeModerator(array $input) : array
   {
-    $user = self::storeUser($input, Role::MODERATOR);
-
-    return $user;
+    return self::store($input, Role::MODERATOR);
   }
 
   public static function storeProvider(array $input) : array
   {
-    $user = self::storeUser($input, Role::PROVIDER);
-
-    return $user;
+    return self::store($input, Role::PROVIDER);
   }
 
   public static function storeClient(array $input) : array
   {
-    $user = self::storeUser($input, Role::CLIENT);
-
-    return $user;
+    return self::store($input, Role::CLIENT);
   }
 
 
 
-  private static function storeUser(array $input, int $role) : array
+  private static function store(array $input, int $role) : array
   {
     $input['password'] = bcrypt($input['password']);
     $input['role_id']  = $role;
