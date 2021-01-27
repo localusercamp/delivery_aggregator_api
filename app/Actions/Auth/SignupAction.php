@@ -13,25 +13,31 @@ use App\Entities\{
   SMSManager,
   SMS,
 };
-use App\Exceptions\SMSMaximumRepeatsExceededException;
+
+use App\Exceptions\SMS\{
+  NotFoundException,
+  CodeComparisonFailedException,
+};
 
 class SignupAction extends Action
 {
   public static function run(array $input, int $role) : array
   {
     $SMSManager = new SMSManager();
-
-    $code = $SMSManager->generateVerificationCode();
-    $sms  = new SMS($input['phone'], "Ваш код для подтверждения регистрации: ${code}", $code);
+    $sms  = $SMSManager->getSMS($input['phone']);
     $task = self::getTaskByType($role);
 
-    $SMSManager->putSMS($sms, 5);
+    if (!$sms) {
+      throw new NotFoundException();
+    }
+    if (!$sms->verifyCode($input['code'])) {
+      throw new CodeComparisonFailedException();
+    }
+    unset($input['code']);
 
-    $resp = $SMSManager->sendSMS($sms);
-    dd($resp);
-    // $smss = $SMSManager->getSMS($sms->phone);
+    $user = $task::run($input);
 
-
+    return $user;
   }
 
   public static function getTaskByType(int $role) : string
@@ -43,5 +49,4 @@ class SignupAction extends Action
       case Role::CLIENT:    return CreateClientTask::class;
     }
   }
-
 }

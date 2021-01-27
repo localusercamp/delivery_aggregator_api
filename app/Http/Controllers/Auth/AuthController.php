@@ -11,6 +11,7 @@ use App\Http\Requests\Auth\{
   ModeratorSignupRequest,
   ModeratorSigninRequest,
   SignoutRequest,
+  VerificationRequest,
 };
 
 use App\Http\Controllers\Controller;
@@ -61,6 +62,15 @@ class AuthController extends Controller
   {
     $input  = $request->validated();
     $output = act('Auth\\SignupAction', $input, Role::CLIENT);
+    return response()->json($output, 200);
+  }
+  #endregion
+
+  #region ----------Верификация----------
+  public function verification(VerificationRequest $request) : JsonResponse
+  {
+    $input  = $request->validated();
+    $output = act('Auth\\SendVerificationSMSAction', $input);
     return response()->json($output, 200);
   }
   #endregion

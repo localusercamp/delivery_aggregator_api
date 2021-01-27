@@ -5,7 +5,7 @@ namespace App\Entities;
 use CooperAV\SmsAero\SmsAero as SMSAero;
 
 use App\Repositories\SMSRepository;
-use App\Exceptions\SMSMaximumRepeatsExceededException;
+use App\Exceptions\SMS\MaximumRepeatsExceededException;
 
 class SMSManager
 {
@@ -33,7 +33,7 @@ class SMSManager
 
   public function putSMS(SMS $sms, int $lifetime_in_minutes) : void
   {
-    $sms->validate();
+    $sms->validate('phone');
     $this->checkForRepeating($sms);
     $redis_key = "sms:{$sms->phone}";
     $lifetime_in_seconds = $lifetime_in_minutes * SECONDS_IN_MINUTE;
@@ -55,7 +55,7 @@ class SMSManager
       $sms->repeat = $prev_sms->repeat;
     }
     if ($sms->repeat === self::MAX_REPEATS + 1) {
-      throw new SMSMaximumRepeatsExceededException();
+      throw new MaximumRepeatsExceededException();
     }
     $sms->repeat += 1;
   }

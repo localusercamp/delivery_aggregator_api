@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Exceptions\SMS;
 
 use Exception;
 
-class SMSMaximumRepeatsExceededException extends Exception
+class NotFoundException extends Exception
 {
   /**
    * Report the exception.
@@ -24,6 +24,6 @@ class SMSMaximumRepeatsExceededException extends Exception
    */
   public function render()
   {
-    return response()->json(['error' => 'Превышено число сообщений для отправки на этот номер телефона, попробуйте позже.'], 422);
+    return response()->json('SMS не найдено', 404);
   }
 }

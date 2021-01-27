@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Exceptions\SMS;
 
 use Exception;
 
-class SMSValidationFailException extends Exception
+class MaximumRepeatsExceededException extends Exception
 {
   /**
    * Report the exception.
@@ -24,6 +24,6 @@ class SMSValidationFailException extends Exception
    */
   public function render()
   {
-    return response()->json('SMS do not pass the validation rules', 422);
+    return response()->json(['error' => 'Превышено число сообщений для отправки на этот номер телефона, попробуйте позже.'], 422);
   }
 }

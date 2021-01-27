@@ -2,7 +2,8 @@
 
 namespace App\Entities;
 
-use App\Exceptions\SMSValidationFailException;
+use App\Exceptions\SMS\ValidationFailedException;
+use Illuminate\Support\Facades\Hash;
 
 class SMS
 {
@@ -16,7 +17,7 @@ class SMS
     $this->phone   = $phone;
     $this->message = $message;
     $this->code    = $code;
-    $this->repeat  = 1;
+    $this->repeat  = 0;
   }
 
   function __serialize()
@@ -46,9 +47,17 @@ class SMS
 
 
 
-  public function validate()
+  public function validate(string ...$fields)
   {
-    if (!$this->phone)
-      throw new SMSValidationFailException();
+    foreach ($fields as $field) {
+      if (!$this->{$field})
+        throw new ValidationFailedException();
+    }
+  }
+
+  public function verifyCode(string $code) : bool
+  {
+    $this->validate('code');
+    return Hash::check($code, $this->code);
   }
 }
