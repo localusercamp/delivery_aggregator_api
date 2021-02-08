@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/doxygen
 .env
 .env.backup
 .phpunit.result.cache

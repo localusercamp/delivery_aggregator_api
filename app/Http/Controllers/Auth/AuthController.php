@@ -14,31 +14,47 @@ use App\Http\Requests\Auth\{
   VerificationRequest,
 };
 
+use App\Actions\Auth\{
+  SigninAction,
+  ModeratorSignupAction,
+  ProviderSignupAction,
+  ClientSignupAction,
+  SendVerificationSMSAction,
+  SignoutAction,
+};
+
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 
 class AuthController extends Controller
 {
-
   #region ----------Авторизация----------
   public function signinModerator(ModeratorSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = act('Auth\\SigninAction', $input);
+    $phone    = $input['phone'];
+    $password = $input['password'];
+
+    $output = SigninAction::run($phone, $password);
     return response()->json($output, 200);
   }
 
   public function signinProvider(ProviderSigninRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
-    $output = act('Auth\\SigninAction', $input);
+    $input    = $request->validated();
+    $phone    = $input['phone'];
+    $password = $input['password'];
+
+    $output = SigninAction::run($phone, $password);
     return response()->json($output, 200);
   }
 
   public function signinClient(ClientSigninRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = act('Auth\\SigninAction', $input);
+    $phone    = $input['phone'];
+    $password = $input['password'];
+
+    $output = SigninAction::run($phone, $password);
     return response()->json($output, 200);
   }
   #endregion
@@ -47,21 +63,33 @@ class AuthController extends Controller
   public function signupModerator(ModeratorSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = act('Auth\\SignupAction', $input, Role::MODERATOR);
+    $phone    = $input['phone'];
+    $password = $input['password'];
+    $code     = $input['code'];
+
+    $output = ModeratorSignupAction::run($phone, $password, $code);
     return response()->json($output, 200);
   }
 
   public function signupProvider(ProviderSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = act('Auth\\SignupAction', $input, Role::PROVIDER);
+    $phone    = $input['phone'];
+    $password = $input['password'];
+    $code     = $input['code'];
+
+    $output = ProviderSignupAction::run($phone, $password, $code);
     return response()->json($output, 200);
   }
 
   public function signupClient(ClientSignupRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = act('Auth\\SignupAction', $input, Role::CLIENT);
+    $phone    = $input['phone'];
+    $password = $input['password'];
+    $code     = $input['code'];
+
+    $output = ClientSignupAction::run($phone, $password, $code);
     return response()->json($output, 200);
   }
   #endregion
@@ -70,7 +98,9 @@ class AuthController extends Controller
   public function verification(VerificationRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = act('Auth\\SendVerificationSMSAction', $input);
+    $phone  = $input['phone'];
+
+    $output = SendVerificationSMSAction::run($phone);
     return response()->json($output, 200);
   }
   #endregion
@@ -81,7 +111,7 @@ class AuthController extends Controller
    */
   public function signout(SignoutRequest $request) : JsonResponse
   {
-    act('Auth\\SignoutAction');
+    SignoutAction::run();
     return response()->json(['message' => 'Successfully logged out']);
   }
 }

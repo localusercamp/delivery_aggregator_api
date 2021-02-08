@@ -11,10 +11,9 @@ use App\Tasks\{
 
 class SigninAction extends Action
 {
-  public static function run(array $input) : array
+  public static function run(string $phone, string $password) : array
   {
-
-    $token = AuthorizeUserTask::run($input);
+    $token = AuthorizeUserTask::run($phone, $password);
     $jwt   = ConstructJwtTask::run($token);
 
     $user  = GetCurrentUserTask::run();

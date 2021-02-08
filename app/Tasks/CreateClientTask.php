@@ -6,8 +6,8 @@ use App\Repositories\UserRepository;
 
 class CreateClientTask extends Task
 {
-  public static function run(array $input) : array
+  public static function run(string $phone, string $password) : array
   {
-    return UserRepository::storeClient($input);
+    return UserRepository::storeClient($phone, $password);
   }
 }

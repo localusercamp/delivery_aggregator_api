@@ -6,8 +6,8 @@ use App\Repositories\UserRepository;
 
 class CreateProviderTask extends Task
 {
-  public static function run(array $input) : array
+  public static function run(string $phone, string $password) : array
   {
-    return UserRepository::storeProvider($input);
+    return UserRepository::storeProvider($phone, $password);
   }
 }

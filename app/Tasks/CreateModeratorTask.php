@@ -6,8 +6,8 @@ use App\Repositories\UserRepository;
 
 class CreateModeratorTask extends Task
 {
-  public static function run(array $input) : array
+  public static function run(string $phone, string $password) : array
   {
-    return UserRepository::storeModerator($input);
+    return UserRepository::storeModerator($phone, $password);
   }
 }

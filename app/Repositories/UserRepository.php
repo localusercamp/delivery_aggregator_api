@@ -9,31 +9,56 @@ use App\Models\{
 
 final class UserRepository extends Repository
 {
-  public static function storeModerator(array $input) : array
+  /**
+   * Создает пользователя с ролью `Role::MODERATOR`
+
+   * @param string $phone Телефон
+   * @param string $password Пароль
+   */
+  public static function storeModerator(string $phone, string $password) : array
   {
-    return self::store($input, Role::MODERATOR);
+    return self::store($phone, $password, Role::MODERATOR);
   }
 
-  public static function storeProvider(array $input) : array
+  /**
+   * Создает пользователя с ролью `Role::PROVIDER`
+   *
+   * @param string $phone Телефон
+   * @param string $password Пароль
+   */
+  public static function storeProvider(string $phone, string $password) : array
   {
-    return self::store($input, Role::PROVIDER);
+    return self::store($phone, $password, Role::PROVIDER);
   }
 
-  public static function storeClient(array $input) : array
+  /**
+   * Создает пользователя с ролью `Role::CLIENT`
+   *
+   * @param string $phone Телефон
+   * @param string $password Пароль
+   */
+  public static function storeClient(string $phone, string $password) : array
   {
-    return self::store($input, Role::CLIENT);
+    return self::store($phone, $password, Role::CLIENT);
   }
 
 
-
-  private static function store(array $input, int $role) : array
+  /**
+   * Создает пользователя
+   *
+   * @param string $phone Телефон
+   * @param string $password Пароль
+   * @param string $role Роль пользователя
+   */
+  private static function store(string $phone, string $password, int $role) : array
   {
-    $input['password'] = bcrypt($input['password']);
-    $input['role_id']  = $role;
-    $input['city_id']  = 1;
+    $password = bcrypt($password);
 
     $user = new User();
-    fill_model($user, $input);
+    $user->phone    = $phone;
+    $user->password = $password;
+    $user->role_id  = $role;
+    $user->city_id  = 1;
     $user->save();
 
     return compact('user');

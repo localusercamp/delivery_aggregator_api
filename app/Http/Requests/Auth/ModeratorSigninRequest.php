@@ -20,16 +20,4 @@ class ClientSigninRequest extends FormRequest
       'password' => 'required|string|min:6',
     ];
   }
-
-  public function withValidator($validator)
-  {
-    if ($validator->passes()) {
-      $credentials = $validator->validated();
-      if (!auth()->validate($credentials)) {
-        $validator->after(function ($validator) {
-          $validator->errors()->add('message', 'Неправильный номер телефона или пароль.');
-        });
-      }
-    }
-  }
 }
