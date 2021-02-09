@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\List;
+namespace App\Actions\Tag;
 
 use App\Actions\Action;
 

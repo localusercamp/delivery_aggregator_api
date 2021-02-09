@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\Auth;
+namespace App\Actions\Product;
 
 use App\Actions\Action;
 
 use App\Models\Product;
 
-class GetProductListAction extends Action
+class CreateProductAction extends Action
 {
   public static function run() : array
   {
