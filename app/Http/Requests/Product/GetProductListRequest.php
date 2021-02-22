@@ -10,7 +10,7 @@ class GetProductListRequest extends FormRequest
 {
   public function authorize() : bool
   {
-    return $this->request->user()->can('viewAny', Product::class);
+    return auth()->user()->can('viewAny', Product::class);
   }
 
   public function rules() : array

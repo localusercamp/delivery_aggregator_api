@@ -10,11 +10,16 @@ class CreateProductRequest extends FormRequest
 {
   public function authorize() : bool
   {
-    return $this->request->user()->can('create', Product::class);
+    return auth()->user()->can('create', Product::class);
   }
 
   public function rules() : array
   {
-    return [];
+    return [
+      'title'       => 'required|string|min:2|max:30',
+      'price'       => 'required|integer|min:0|max:100000',
+      'tags'        => 'required|array',
+      'description' => 'nullable|string|min:2|max:30',
+    ];
   }
 }

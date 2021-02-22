@@ -16,6 +16,6 @@ class ProviderSignupAction extends Action
     VerifySMSCodeTask::run($phone, $code);
     $user = CreateProviderTask::run($phone, $password);
 
-    return $user;
+    return compact('user');
   }
 }

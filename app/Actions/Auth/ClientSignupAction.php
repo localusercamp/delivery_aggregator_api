@@ -16,6 +16,6 @@ class ClientSignupAction extends Action
     VerifySMSCodeTask::run($phone, $code);
     $user = CreateClientTask::run($phone, $password);
 
-    return $user;
+    return compact('user');
   }
 }

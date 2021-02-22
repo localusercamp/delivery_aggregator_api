@@ -15,7 +15,7 @@ final class UserRepository extends Repository
    * @param string $phone Телефон
    * @param string $password Пароль
    */
-  public static function storeModerator(string $phone, string $password) : array
+  public static function storeModerator(string $phone, string $password) : User
   {
     return self::store($phone, $password, Role::MODERATOR);
   }
@@ -26,7 +26,7 @@ final class UserRepository extends Repository
    * @param string $phone Телефон
    * @param string $password Пароль
    */
-  public static function storeProvider(string $phone, string $password) : array
+  public static function storeProvider(string $phone, string $password) : User
   {
     return self::store($phone, $password, Role::PROVIDER);
   }
@@ -37,7 +37,7 @@ final class UserRepository extends Repository
    * @param string $phone Телефон
    * @param string $password Пароль
    */
-  public static function storeClient(string $phone, string $password) : array
+  public static function storeClient(string $phone, string $password) : User
   {
     return self::store($phone, $password, Role::CLIENT);
   }
@@ -50,7 +50,7 @@ final class UserRepository extends Repository
    * @param string $password Пароль
    * @param string $role Роль пользователя
    */
-  private static function store(string $phone, string $password, int $role) : array
+  private static function store(string $phone, string $password, int $role) : User
   {
     $password = bcrypt($password);
 
@@ -61,6 +61,6 @@ final class UserRepository extends Repository
     $user->city_id  = 1;
     $user->save();
 
-    return compact('user');
+    return $user;
   }
 }

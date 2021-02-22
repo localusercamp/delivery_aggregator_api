@@ -5,14 +5,16 @@ use Illuminate\Http\JsonResponse;
 
 use App\Http\Controllers\Controller;
 
-use App\Actions\{
-  Lists\GetProductListAction,
-  Product\CreateProductAction,
+use App\Actions\Product\{
+  GetProductListAction,
+  CreateProductAction,
+  ChangeProductPosterAction
 };
 
 use App\Http\Requests\Product\{
   CreateProductRequest,
   GetProductListRequest,
+  ChangePropductPosterRequest,
 };
 
 class ProductController extends Controller
@@ -29,7 +31,21 @@ class ProductController extends Controller
   public function create(CreateProductRequest $request) : JsonResponse
   {
     $input  = $request->validated();
-    $output = CreateProductAction::run();
+    $title       = $input['title'];
+    $description = $input['description'];
+    $price       = $input['price'];
+    $tags        = $input['tags'];
+
+    $output = CreateProductAction::run($title, $description, $price, $tags);
+    return response()->json($output, 200);
+  }
+
+  public function changePoster(ChangePropductPosterRequest $request, int $id) : JsonResponse
+  {
+    $input  = $request->validated();
+    $poster = $input['poster'];
+
+    $output = ChangeProductPosterAction::run($id, $poster);
     return response()->json($output, 200);
   }
 }

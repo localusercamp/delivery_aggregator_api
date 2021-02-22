@@ -57,7 +57,7 @@ class ProductPolicy
    */
   public function update(User $user, Product $product)
   {
-    //
+    return $user->isProvider && $product->creator->id === $user->id;
   }
 
   /**

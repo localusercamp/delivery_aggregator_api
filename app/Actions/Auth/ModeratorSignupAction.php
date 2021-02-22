@@ -16,6 +16,6 @@ class ModeratorSignupAction extends Action
     VerifySMSCodeTask::run($phone, $code);
     $user = CreateModeratorTask::run($phone, $password);
 
-    return $user;
+    return compact('user');
   }
 }
