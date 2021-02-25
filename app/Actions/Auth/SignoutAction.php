@@ -2,7 +2,7 @@
 
 namespace App\Actions\Auth;
 
-use App\Actions\Action;
+use App\Contracts\Action;
 
 class SignoutAction extends Action
 {

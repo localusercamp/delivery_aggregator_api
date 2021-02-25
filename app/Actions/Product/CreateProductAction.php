@@ -2,7 +2,7 @@
 
 namespace App\Actions\Product;
 
-use App\Actions\Action;
+use App\Contracts\Action;
 use App\Exceptions\BuisnesLogicException;
 use App\Repositories\ProductRepository;
 

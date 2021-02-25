@@ -4,12 +4,12 @@ namespace App\Tasks;
 
 use App\Models\{
   Product,
-  Image,
+  Poster,
 };
 
 class ChangeProductPosterTask extends Task
 {
-  public static function run(Product $product, Image $poster) : void
+  public static function run(Product $product, Poster $poster) : void
   {
     if ($product->poster) {
       $product->poster->deletePublicSource();

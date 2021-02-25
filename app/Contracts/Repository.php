@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Contracts;
 
-use App\Contracts\IRepository;
+use App\Interfaces\IRepository;
 
 abstract class Repository implements IRepository
 {

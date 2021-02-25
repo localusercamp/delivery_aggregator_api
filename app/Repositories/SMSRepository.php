@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use Illuminate\Support\Facades\Cache;
 
+use App\Contracts\Repository;
+
 class SMSRepository extends Repository
 {
   public static function store(string $key, string $input, int $lifetime_in_seconds) : void

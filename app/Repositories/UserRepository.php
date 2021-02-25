@@ -6,6 +6,7 @@ use App\Models\{
   User,
   Role,
 };
+use App\Contracts\Repository;
 
 final class UserRepository extends Repository
 {

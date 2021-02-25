@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\Relations\{
   BelongsTo,
   BelongsToMany,
@@ -12,10 +10,10 @@ use Illuminate\Database\Eloquent\Relations\{
   HasOne,
 };
 
+use App\Collections\ProductCollection;
+
 class Product extends Model
 {
-  use HasFactory;
-
   protected $table = 'product';
 
   protected $fillable = [
@@ -49,7 +47,12 @@ class Product extends Model
 
   public function poster() : HasOne
   {
-    return $this->hasOne(Image::class, 'id', 'poster_id');
+    return $this->hasOne(Poster::class, 'id', 'poster_id');
   }
   #endregion
+
+  public function newCollection(array $models = []) : ProductCollection
+  {
+    return new ProductCollection($models);
+  }
 }

@@ -30,9 +30,9 @@ class ProductController extends Controller
 
   public function create(CreateProductRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
+    $input = $request->validated();
     $title       = $input['title'];
-    $description = $input['description'];
+    $description = have($input, 'description');
     $price       = $input['price'];
     $tags        = $input['tags'];
 

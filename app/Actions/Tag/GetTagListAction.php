@@ -2,7 +2,7 @@
 
 namespace App\Actions\Tag;
 
-use App\Actions\Action;
+use App\Contracts\Action;
 
 use App\Models\Tag;
 

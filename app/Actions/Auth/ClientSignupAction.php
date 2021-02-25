@@ -2,7 +2,7 @@
 
 namespace App\Actions\Auth;
 
-use App\Actions\Action;
+use App\Contracts\Action;
 
 use App\Tasks\{
   CreateClientTask,
@@ -11,7 +11,7 @@ use App\Tasks\{
 
 class ClientSignupAction extends Action
 {
-  public static function run(string $phone, string $password, string $code) : array
+  public static function run(string $phone, string $password, string $code = null) : array
   {
     VerifySMSCodeTask::run($phone, $code);
     $user = CreateClientTask::run($phone, $password);

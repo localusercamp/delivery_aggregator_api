@@ -2,14 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-final class Image extends File
+class Image extends File
 {
-  use HasFactory;
-
-  protected $table = 'image';
-
   protected $appends = [
     'url'
   ];
@@ -17,8 +11,6 @@ final class Image extends File
   protected $hidden = [
     'path'
   ];
-
-
 
   public function getUrlAttribute() {
     return asset("storage/{$this->path}");

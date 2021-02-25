@@ -3,8 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-
-use App\Exceptions\Repository\ModelSyncArgumentException;
+use App\Contracts\Repository;
 
 class ProductRepository extends Repository
 {
