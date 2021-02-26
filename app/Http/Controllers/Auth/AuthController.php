@@ -30,7 +30,7 @@ class AuthController extends Controller
   #region ----------Авторизация----------
   public function signinModerator(ModeratorSigninRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
+    $input = $request->validated();
     $phone    = $input['phone'];
     $password = $input['password'];
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
 
   public function signinProvider(ProviderSigninRequest $request) : JsonResponse
   {
-    $input    = $request->validated();
+    $input = $request->validated();
     $phone    = $input['phone'];
     $password = $input['password'];
 
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
   public function signinClient(ClientSigninRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
+    $input = $request->validated();
     $phone    = $input['phone'];
     $password = $input['password'];
 
@@ -62,7 +62,7 @@ class AuthController extends Controller
   #region ----------Регистрация----------
   public function signupModerator(ModeratorSignupRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
+    $input = $request->validated();
     $phone    = $input['phone'];
     $password = $input['password'];
     $code     = $input['code'];
@@ -73,7 +73,7 @@ class AuthController extends Controller
 
   public function signupProvider(ProviderSignupRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
+    $input = $request->validated();
     $phone    = $input['phone'];
     $password = $input['password'];
     $code     = $input['code'];
@@ -84,7 +84,7 @@ class AuthController extends Controller
 
   public function signupClient(ClientSignupRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
+    $input = $request->validated();
     $phone    = $input['phone'];
     $password = $input['password'];
     $code     = $input['code'];
@@ -97,8 +97,8 @@ class AuthController extends Controller
   #region ----------Верификация----------
   public function verification(VerificationRequest $request) : JsonResponse
   {
-    $input  = $request->validated();
-    $phone  = $input['phone'];
+    $input = $request->validated();
+    $phone = $input['phone'];
 
     $output = SendVerificationSMSAction::run($phone);
     return response()->json($output, 200);

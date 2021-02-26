@@ -15,7 +15,6 @@ class SigninAction extends Action
   {
     $token = AuthorizeUserTask::run($phone, $password);
     $jwt   = ConstructJwtTask::run($token);
-
     $user  = GetCurrentUserTask::run();
 
     return compact('jwt', 'user');
