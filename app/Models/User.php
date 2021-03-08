@@ -36,24 +36,23 @@ class User extends Authenticatable implements JWTSubject
   ];
 
 
-
-  #region   ----------Attributes----------
-  public function getIsAdminAttribute()
+  #region   ----------Computors----------
+  public function isAdmin() : bool
   {
     return $this->role_id === Role::ADMIN;
   }
 
-  public function getIsModeratorAttribute()
+  public function isModerator() : bool
   {
     return $this->role_id === Role::MODERATOR;
   }
 
-  public function getIsProviderAttribute()
+  public function isProvider() : bool
   {
     return $this->role_id === Role::PROVIDER;
   }
 
-  public function getIsClientAttribute()
+  public function isClient() : bool
   {
     return $this->role_id === Role::CLIENT;
   }

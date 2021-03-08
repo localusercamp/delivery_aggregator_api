@@ -4,9 +4,9 @@ namespace App\Contracts;
 
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
-use App\Interfaces\ICollection;
+use App\Interfaces\ICustomCollection;
 
-abstract class CustomCollection extends EloquentCollection implements ICollection
+abstract class CustomCollection extends EloquentCollection implements ICustomCollection
 {
 
 }

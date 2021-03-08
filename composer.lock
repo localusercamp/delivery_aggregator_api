@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a47f0b6f434adc22fa50fa5b5f145d38",
+    "content-hash": "0f7c248b638d5bc64da83cfb259b73c8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4663,6 +4663,60 @@
             "time": "2020-10-27T10:11:13+00:00"
         },
         {
+            "name": "thread-media/commands",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localusercamp/tm-commands.git",
+                "reference": "1a16aa9b75723b09e0c10f9afa490f08bd149064"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localusercamp/tm-commands/zipball/1a16aa9b75723b09e0c10f9afa490f08bd149064",
+                "reference": "1a16aa9b75723b09e0c10f9afa490f08bd149064",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7|^8",
+                "laravel/framework": "^8.0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "illuminate/console": "^7|^8",
+                "laravel/framework": "^8.0",
+                "php": "^7.4"
+            },
+            "type": "artisan-commands",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TM\\Commands\\TMCommandsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TM\\Commands\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "localusercamp",
+                    "email": "user062199@gmail.com"
+                }
+            ],
+            "description": "Laravel 8 artisan commands package.",
+            "support": {
+                "issues": "https://github.com/localusercamp/tm-commands/issues",
+                "source": "https://github.com/localusercamp/tm-commands/tree/1.0"
+            },
+            "time": "2021-03-01T05:33:48+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.3",
             "source": {
@@ -7261,5 +7315,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

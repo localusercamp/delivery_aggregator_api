@@ -29,7 +29,7 @@ function codegen(int $n, string $alloc = null) : string
  * @param array $array Массив
  * @param string $key Ключ массива
  */
-function have(array $array, string $key)
+function array_have(array $array, string $key)
 {
   return isset($array[$key]) ? $array[$key] : null;
 }

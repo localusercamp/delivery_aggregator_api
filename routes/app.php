@@ -9,4 +9,7 @@ Route::middleware('authenticated')->group(function() {
   Route::prefix('tag')->group(function() {
     Route::get('/', 'TagController@list');
   });
+  Route::prefix('utils')->group(function() {
+    Route::post('get-companies-by-inn', 'UtilsController@getCompaniesByInn');
+  });
 });

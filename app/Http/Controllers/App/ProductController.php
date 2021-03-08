@@ -10,12 +10,12 @@ use App\Actions\Product\{
   CreateProductAction,
   ChangeProductPosterAction
 };
-
 use App\Http\Requests\Product\{
   CreateProductRequest,
   GetProductListRequest,
   ChangePropductPosterRequest,
 };
+use App\Entities\FormDataManager;
 
 class ProductController extends Controller
 {
@@ -30,13 +30,14 @@ class ProductController extends Controller
 
   public function create(CreateProductRequest $request) : JsonResponse
   {
-    $input = $request->validated();
+    $input = $request->all();
     $title       = $input['title'];
-    $description = have($input, 'description');
+    $description = array_have($input, 'description');
     $price       = $input['price'];
-    $tags        = $input['tags'];
+    $tags        = FormDataManager::unpackIdArray($input['tags']);
+    $poster      = $input['poster'];
 
-    $output = CreateProductAction::run($title, $description, $price, $tags);
+    $output = CreateProductAction::run($title, $description, $price, $tags, $poster);
     return response()->json($output, 200);
   }
 

@@ -8,6 +8,7 @@ use App\Tasks\{
   ConstructJwtTask,
   GetCurrentUserTask,
 };
+use Illuminate\Console\GeneratorCommand;
 
 class SigninAction extends Action
 {

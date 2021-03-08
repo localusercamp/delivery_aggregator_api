@@ -22,7 +22,7 @@ class ProductPolicy
    */
   public function viewAny(User $user)
   {
-    return $user->isProvider;
+    return $user->isProvider();
   }
 
   /**
@@ -45,7 +45,7 @@ class ProductPolicy
    */
   public function create(User $user)
   {
-    return $user->isProvider;
+    return $user->isProvider();
   }
 
   /**
@@ -57,7 +57,7 @@ class ProductPolicy
    */
   public function update(User $user, Product $product)
   {
-    return $user->isProvider && $product->creator->id === $user->id;
+    return $user->isProvider() && $product->creator->id === $user->id;
   }
 
   /**

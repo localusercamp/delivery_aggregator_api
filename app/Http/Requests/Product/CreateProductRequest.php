@@ -19,6 +19,7 @@ class CreateProductRequest extends FormRequest
       'title'       => 'required|string|min:2|max:30',
       'price'       => 'required|integer|min:0|max:100000',
       'tags'        => 'required|array',
+      'poster'      => 'required|file|mimes:jpg,jpeg,png',
       'description' => 'nullable|string|min:2|max:30',
     ];
   }
