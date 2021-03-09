@@ -9,6 +9,9 @@ Route::middleware('authenticated')->group(function() {
     Route::post('/', 'ProductController@create');
     Route::post('/{id}/change-poster', 'ProductController@changePoster')->where('id', '[0-9]+');
   });
+  Route::prefix('user')->group(function() {
+    Route::get('/sync', 'UserController@sync');
+  });
   Route::prefix('tag')->group(function() {
     Route::get('/', 'TagController@list');
   });
