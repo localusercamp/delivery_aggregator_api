@@ -8,7 +8,6 @@ use App\Tasks\{
   ConstructJwtTask,
   GetCurrentUserTask,
 };
-use Illuminate\Console\GeneratorCommand;
 
 class SigninAction extends Action
 {
@@ -16,7 +15,7 @@ class SigninAction extends Action
   {
     $token = AuthorizeUserTask::run($phone, $password);
     $jwt   = ConstructJwtTask::run($token);
-    $user  = GetCurrentUserTask::run();
+    $user  = GetCurrentUserTask::run(['company']);
 
     return compact('jwt', 'user');
   }

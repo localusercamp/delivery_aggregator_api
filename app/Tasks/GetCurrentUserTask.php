@@ -4,8 +4,8 @@ namespace App\Tasks;
 
 class GetCurrentUserTask extends Task
 {
-  public static function run()
+  public static function run(?array $relations)
   {
-    return auth()->user();
+    return $relations ? auth()->user()->load($relations) : auth()->user();
   }
 }

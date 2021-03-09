@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\{
   BelongsTo,
   BelongsToMany,
   HasMany,
+  HasOne
 };
 
 class User extends Authenticatable implements JWTSubject
@@ -96,6 +97,11 @@ class User extends Authenticatable implements JWTSubject
   public function orders() : HasMany
   {
     return $this->hasMany(Order::class, 'client_id', 'id');
+  }
+
+  public function company() : HasOne
+  {
+    return $this->hasOne(Company::class, 'owner_id', 'id');
   }
   #endregion
 }

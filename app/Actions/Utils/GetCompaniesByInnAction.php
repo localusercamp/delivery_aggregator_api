@@ -13,9 +13,11 @@ final class GetCompaniesByInnAction extends Action
   public static function run(string $inn) : array
   {
     $DadataManager = new DadataManager();
-    $DadataManager
+    $companies = $DadataManager
       ->setInn($inn)
       ->setTypeFromInn()
       ->getOrganisationsByInn();
+
+    return compact('companies');
   }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Exceptions\BuisnesLogicException;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
@@ -18,13 +19,23 @@ class DadataManager
   protected string $inn;
 
 
-  public function getOrganisationsByInn()
+  public function getOrganisationsByInn() : array
   {
-    $response = Http::post("https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/party", [
-      'query' => $this->inn,
-      'type'  => $this->type,
-    ]);
-    dd($response);
+    $response = Http::withHeaders($this->defaultHeaders())
+      ->post("https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/party", [
+        'query' => $this->inn,
+        'type'  => $this->type,
+      ])
+      ->json();
+
+    if (isset($response['suggestions'])) {
+      if (count($response['suggestions']) > 0) {
+        return $response['suggestions'];
+      }
+      else {
+        return [];
+      }
+    }
   }
 
   public function setTypeFromInn() : self
@@ -63,5 +74,14 @@ class DadataManager
     else {
       throw new Exception('Inn is invalid!');
     }
+  }
+
+  protected function defaultHeaders() : array
+  {
+    return [
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json',
+      'Authorization' => 'Token ' . config('dadata.api_key')
+    ];
   }
 }

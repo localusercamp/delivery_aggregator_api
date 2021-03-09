@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Relations\{
   BelongsToMany,
-  HasMany
+  HasMany,
+  HasOne,
 };
 
 class Company extends Model
@@ -25,6 +26,11 @@ class Company extends Model
   public function products() : HasMany
   {
     return $this->hasMany(Product::class, 'company_id', 'id');
+  }
+
+  public function owner() : HasOne
+  {
+    return $this->hasOne(User::class, 'id', 'owner_id');
   }
   #endregion
 }

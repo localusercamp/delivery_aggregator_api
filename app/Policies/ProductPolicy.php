@@ -20,7 +20,7 @@ class ProductPolicy
    * @param  \App\Models\User  $user
    * @return mixed
    */
-  public function viewAny(User $user)
+  public function viewAny(User $user) : bool
   {
     return $user->isProvider();
   }
@@ -43,7 +43,7 @@ class ProductPolicy
    * @param  \App\Models\User  $user
    * @return mixed
    */
-  public function create(User $user)
+  public function create(User $user) : bool
   {
     return $user->isProvider();
   }
@@ -55,7 +55,7 @@ class ProductPolicy
    * @param  \App\Models\Product  $product
    * @return mixed
    */
-  public function update(User $user, Product $product)
+  public function update(User $user, Product $product) : bool
   {
     return $user->isProvider() && $product->creator->id === $user->id;
   }

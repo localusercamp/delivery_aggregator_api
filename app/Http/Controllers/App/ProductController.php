@@ -32,7 +32,7 @@ class ProductController extends Controller
   {
     $input = $request->all();
     $title       = $input['title'];
-    $description = array_have($input, 'description');
+    $description = $input['description'] ?? null;
     $price       = $input['price'];
     $tags        = FormDataManager::unpackIdArray($input['tags']);
     $poster      = $input['poster'];
